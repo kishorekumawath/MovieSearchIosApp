@@ -1,0 +1,5 @@
+{
+    "traktBaseURL":"https://api.trakt.tv/movies/",
+    "traktClientID":"Your Client Id"
+    
+}
