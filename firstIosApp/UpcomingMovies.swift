@@ -13,6 +13,7 @@ struct UpcomingView: View {
     
     var body: some View {
         NavigationStack {
+            Text("UpComing")
             GeometryReader { geo in
                 switch viewModel.upcomingStatus {
                 case .notStarted:

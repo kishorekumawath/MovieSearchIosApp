@@ -5,7 +5,7 @@
 //  Created by Kishore Kumar on 04/04/26.
 //
 
-import SwiftUI 
+import SwiftUI
 
 struct ContentView: View {
     var body: some View {
@@ -17,10 +17,7 @@ struct ContentView: View {
                 UpcomingView()
             }
             Tab(AppConstants.searchString,systemImage: AppConstants.searchIconString){
-                Text(AppConstants.searchString)
-            }
-            Tab(AppConstants.downloadString,systemImage: AppConstants.downloadIconString){
-                Text(AppConstants.downloadString)
+                SearchView()
             }
         }
     }

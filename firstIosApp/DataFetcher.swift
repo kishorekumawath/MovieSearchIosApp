@@ -41,6 +41,15 @@ struct DataFetcher {
 
             return response.map { $0.title }
 
+        }else if type == "search" {
+            
+            let response: [SearchItem] = try await fetchAndDecodeTRAKT(
+                url: fetchTitlesURL,
+                type: [SearchItem].self
+            )
+
+            return response.map { $0.title }
+
         } else {
 
             return try await fetchAndDecodeTRAKT(
@@ -130,18 +139,21 @@ struct DataFetcher {
                path = "\(media)/\(type)"
            } else if type == "popular" || type == "anticipated" {
                path = "\(media)/\(type)"
+           }else if type == "search"{
+               path = "search/\(media)"
            }
         else {
                throw NetworkError.urlBuildFailed
            }
-           
-           
-           guard let url = URL(string: baseURL)?
-               .appending(path: path)
-
-        else {
-               throw NetworkError.urlBuildFailed
-           }
+        
+        var url = URL(string: baseURL)?
+            .appending(path: path)
+        
+        if let searchPhrase, type == "search" {
+            url = url?.appending(queryItems: [
+                URLQueryItem(name: "query", value: searchPhrase)
+            ])
+        }
            
            return url
        }

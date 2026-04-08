@@ -86,6 +86,35 @@ struct AnticipatedItem: Decodable {
     }
 }
 
+struct SearchItem: Decodable {
+    let score: Double
+    let title: Title
+
+    enum CodingKeys: String, CodingKey {
+        case score
+        case movie
+        case show
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        score = try container.decode(Double.self, forKey: .score)
+
+        if let movie = try container.decodeIfPresent(Title.self, forKey: .movie) {
+            title = movie
+        } else if let show = try container.decodeIfPresent(Title.self, forKey: .show) {
+            title = show
+        } else {
+            throw DecodingError.dataCorruptedError(
+                forKey: .movie,
+                in: container,
+                debugDescription: "No movie or show found"
+            )
+        }
+    }
+}
+
 // MARK: - IDs
 struct IDs: Codable, Hashable {
     let trakt: Int?
