@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     var heroTestTitle = AppConstants.testTitleURL
+    let viewModel = ViewModel()
     
     var body: some View {
         GeometryReader { geo in
@@ -42,12 +43,17 @@ struct HomeView: View {
                         
                     }
                     
+                    horizontalListView(header: AppConstants.trendingMovieString,titles:viewModel.trendingMovies)
+                    horizontalListView(header: AppConstants.topRatedMovieString,titles:viewModel.popularMovies)
+                    horizontalListView(header: AppConstants.trendingTVString,titles:viewModel.trendingTV)
+                    horizontalListView(header: AppConstants.topRatedTVString,titles:viewModel.popularTV)
+                 
                     
-                    horizontalListView(header: AppConstants.trendingMovieString)
-                    horizontalListView(header: AppConstants.trendingTVString)
-                    horizontalListView(header: AppConstants.topRatedMovieString)
-                    horizontalListView(header: AppConstants.topRatedTVString)
+                    
+
                 }
+            }.task {
+                await viewModel.getTitles()
             }
         }
     }
