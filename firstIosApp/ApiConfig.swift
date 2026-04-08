@@ -9,6 +9,9 @@ import Foundation
 struct APIConfig: Decodable{
     let traktBaseURL: String
     let traktClientID: String
+    let youtubeAPIKey: String
+    let youtubeBaseURL: String
+    let youtubeSearchURL: String
     
     static let shared: APIConfig? = {
         do{

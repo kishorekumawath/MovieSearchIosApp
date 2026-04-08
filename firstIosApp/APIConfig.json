@@ -1,5 +1,8 @@
 {
-    "traktBaseURL":"https://api.trakt.tv/movies/",
-    "traktClientID":"Your Client Id"
-    
+    "traktBaseURL":"https://api.trakt.tv",
+    "traktClientID":"",
+    "youtubeBaseURL":"https:youtube.com/embed",
+    "youtubeAPIKey":"",
+    "youtubeSearchURL":"https://www.googleapis.com/youtube/v3/search"
 }
+

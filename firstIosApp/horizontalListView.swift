@@ -10,6 +10,7 @@ import SwiftUI
 struct horizontalListView: View {
     let header :String
     var titles :[Title]
+    let onSelect : (Title)-> Void
     var body: some View {
         VStack(alignment: .leading,){
             Text(header).font(.title)
@@ -20,7 +21,9 @@ struct horizontalListView: View {
                             image in image.resizable().scaledToFit().clipShape(RoundedRectangle(cornerRadius: 12))
                         } placeholder: {
                             ProgressView()
-                        }.frame(width: 120, height: 200)
+                        }.frame(width: 120, height: 200).onTapGesture{
+                            onSelect(title)
+                        }
                     }
                 }
             }
@@ -40,5 +43,8 @@ struct horizontalListView: View {
                 ids: IDs(trakt: 1)
             )
         ]
-    )
+        
+    ){
+        Title in
+    }
 }

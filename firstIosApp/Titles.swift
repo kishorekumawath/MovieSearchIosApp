@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Title: Codable, Identifiable {
+struct Title: Codable, Identifiable, Hashable {
     let id: Int          // 👈 from ids.trakt
     let title: String
     let images: Images?
@@ -70,12 +70,12 @@ struct TrendingItem: Decodable {
 }
 
 // MARK: - IDs
-struct IDs: Codable {
+struct IDs: Codable, Hashable {
     let trakt: Int?
 }
 
 // MARK: - Images
-struct Images: Codable {
+struct Images: Codable, Hashable{
     let poster: [String]?
 }
 
