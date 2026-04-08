@@ -32,6 +32,15 @@ struct DataFetcher {
     
             return response.map { $0.title }
             
+        } else if type == "anticipated" {
+            
+            let response: [AnticipatedItem] = try await fetchAndDecodeTRAKT(
+                url: fetchTitlesURL,
+                type: [AnticipatedItem].self
+            )
+
+            return response.map { $0.title }
+
         } else {
 
             return try await fetchAndDecodeTRAKT(
@@ -114,35 +123,22 @@ struct DataFetcher {
            guard let baseURL = traktBaseURL else {
                throw NetworkError.missingConfig
            }
-//           guard let apiKey = traktCilentID else {
-//               throw NetworkError.missingConfig
-//           }
-           
+
            var path:String
            
            if type == "trending" {
                path = "\(media)/\(type)"
-           } else if type == "popular" || type == "upcoming" {
+           } else if type == "popular" || type == "anticipated" {
                path = "\(media)/\(type)"
            }
-//        else if type == "search" {
-//               path = "3/\(type)/\(media)"
-//           }
         else {
                throw NetworkError.urlBuildFailed
            }
            
-//           var urlQueryItems = [
-//               URLQueryItem(name: "api_key", value: apiKey)
-//           ]
-           
-//           if let searchPhrase {
-//               urlQueryItems.append(URLQueryItem(name: "query", value: searchPhrase))
-//           }
            
            guard let url = URL(string: baseURL)?
                .appending(path: path)
-//               .appending(queryItems: urlQueryItems)
+
         else {
                throw NetworkError.urlBuildFailed
            }

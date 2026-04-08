@@ -69,6 +69,23 @@ struct TrendingItem: Decodable {
     }
 }
 
+struct AnticipatedItem: Decodable {
+    let listCount: Int
+    let title: Title
+
+    enum CodingKeys: String, CodingKey {
+        case listCount
+        case movie
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        listCount = try container.decode(Int.self, forKey: .listCount)
+        title = try container.decode(Title.self, forKey: .movie)
+    }
+}
+
 // MARK: - IDs
 struct IDs: Codable, Hashable {
     let trakt: Int?

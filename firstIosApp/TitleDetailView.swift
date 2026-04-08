@@ -33,10 +33,6 @@ struct TitleDetailView: View {
                            .bold()
                            .font(.title2)
                            .padding(5)
-                        
-                       
-                       Text(title.title)
-                           .padding(5)
                        
                        HStack {
                            Spacer()
